@@ -1,4 +1,3 @@
-//import './App.css';
 import styled from '@emotion/styled';
 
 export const PreviewWrapper = styled.div`
@@ -14,9 +13,8 @@ export const PreviewWrapper = styled.div`
     font-family: 'Open Sans Semibold', sans-serif;
     font-weight: 600;
     line-height: 30px;
-    color: blue
+    color: blue;
   }
-
 `;
 
 export const InputWrapper = styled.div`
@@ -32,7 +30,7 @@ export const InputWrapper = styled.div`
   }
 
   label {
-    width:40%;
+    width: 40%;
   }
 
   button {
@@ -40,6 +38,5 @@ export const InputWrapper = styled.div`
     width: 100px;
     margin: 10px;
     font-family: 'Open Sans Semibold', sans-serif;
-
   }
 `;
