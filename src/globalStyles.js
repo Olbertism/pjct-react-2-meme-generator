@@ -3,6 +3,7 @@
 import { css } from '@emotion/react';
 
 export const globalStyles = css`
+ @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Open+Sans&display=swap');
   @font-face {
     font-family: 'Open Sans', sans-serif;
     src: url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
@@ -10,6 +11,10 @@ export const globalStyles = css`
   @font-face {
     font-family: 'Open Sans Semibold', sans-serif;
     src: url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap);
+  }
+  @font-face {
+    font-family: 'Oleo Script Swash Caps', cursive;
+    src: url(https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap);
   }
   html,
   body {
@@ -37,8 +42,15 @@ export const globalStyles = css`
     align-items: center;
   }
 
+  h1 {
+    font-family: 'Oleo Script Swash Caps' , cursive;
+    font-size: 38px;
+    color: #f24242;
+  }
+
   h2 {
-    color: #3a3a3a;
+
+    color: #4254b5;
   }
   *:focus {
     outline-style: solid;
