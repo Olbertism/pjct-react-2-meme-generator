@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -6,6 +6,7 @@ export default function InputControls(props) {
   const [topText, setTopText] = useState('');
   const [bottomText, setBottomText] = useState('');
   const [template, setTemplate] = useState('');
+  const [templateList, setTemplateList] = useState([]);
 
   const requestData = [topText, bottomText, template];
   console.log(requestData);
@@ -31,12 +32,32 @@ export default function InputControls(props) {
       .catch(() => {});
   };
 
+  const getTemplates = async function () {
+    await axios
+      .get(requestBaseAddress)
+      .then((response) => {
+        console.log('template response: ', response.data);
+        const templates = [''];
+        response.data.forEach((entry) => {
+          templates.push(entry);
+        });
+        console.log('templates array: ', templates);
+        setTemplateList(templates);
+      })
+      .catch(() => {
+        return [];
+      });
+  };
+  useEffect(() => {
+    getTemplates().catch(() => {});
+  }, []);
+
   return (
-    <div>
-      <h2>Input Controls</h2>
+    <>
+      <h2>Select your text and picture template</h2>
       <label>
         {' '}
-        Top text:
+        Top text
         <input
           onChange={(event) => {
             setTopText(event.currentTarget.value);
@@ -45,7 +66,7 @@ export default function InputControls(props) {
       </label>
       <label>
         {' '}
-        Bottom text:
+        Bottom text
         <input
           onChange={(event) => {
             setBottomText(event.currentTarget.value);
@@ -54,20 +75,44 @@ export default function InputControls(props) {
       </label>
       <label>
         {' '}
-        Template:
-        <input
+        Meme template
+        {/* <input
+          list="memeTemplates"
           onChange={(event) => {
             setTemplate(event.currentTarget.value);
           }}
         />
+        <datalist id="memeTemplates">
+          {templateList.map((item) => {
+            return (
+              <option value={item.id} key={item.id}>
+                {item.name}
+              </option>
+            );
+          })}
+        </datalist> */}
+        <select
+          onChange={(event) => {
+            setTemplate(event.currentTarget.value);
+          }}
+        >
+          {templateList.map((item) => {
+            return (
+              <option value={item.id} key={item.id}>
+                {item.name}
+              </option>
+            );
+          })}
+        </select>
       </label>
       <button
+        data-test-id="generate-meme"
         onClick={() => {
           handleGeneration();
         }}
       >
         Generate
       </button>
-    </div>
+    </>
   );
 }

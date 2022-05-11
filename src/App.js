@@ -1,10 +1,13 @@
+/** @jsxImportSource @emotion/react */
+
 import { useEffect, useState } from 'react';
-import './App.css';
+import { InputWrapper, PreviewWrapper } from './elements';
+// import './App.css';
 import InputControls from './InputControls';
 import PreviewArea from './PreviewArea';
 
 export default function App() {
-  const [imgAddress, setImgAddress] = useState('https://place-hold.it/300x300');
+  const [imgAddress, setImgAddress] = useState('https://place-hold.it/400x400');
   const [requestData, setRequestData] = useState('');
 
   useEffect(() => {
@@ -15,13 +18,19 @@ export default function App() {
   }, [requestData, imgAddress]);
 
   console.log('RequestData in Parent: ', requestData);
-  console.log('LAtest img address: ', imgAddress);
+  console.log('Latest img address: ', imgAddress);
 
   return (
     <main>
-      <h1>Meme Generator</h1>
-      <InputControls passRequestData={setRequestData} />
-      <PreviewArea imgAddress={imgAddress} />
+      <article>
+        <h1>Dank memes generator</h1>
+        <InputWrapper>
+          <InputControls passRequestData={setRequestData} />
+        </InputWrapper>
+        <PreviewWrapper>
+          <PreviewArea imgAddress={imgAddress} />
+        </PreviewWrapper>
+      </article>
     </main>
   );
 }
