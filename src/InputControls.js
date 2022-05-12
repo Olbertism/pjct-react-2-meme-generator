@@ -69,7 +69,6 @@ export default function InputControls(props) {
     <>
       <h2>Select your text and picture template</h2>
       <label>
-        {' '}
         Top text
         <input
           onChange={(event) => {
@@ -78,7 +77,6 @@ export default function InputControls(props) {
         />
       </label>
       <label>
-        {' '}
         Bottom text
         <input
           onChange={(event) => {
@@ -87,7 +85,6 @@ export default function InputControls(props) {
         />
       </label>
       <label>
-        {' '}
         Meme template
         {/* <input
           list="memeTemplates"
