@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { InputWrapper, PreviewWrapper } from './elements';
+import History from './History';
 // import './App.css';
 import InputControls from './InputControls';
 import PreviewArea from './PreviewArea';
@@ -30,6 +31,7 @@ export default function App() {
         <PreviewWrapper>
           <PreviewArea imgAddress={imgAddress} />
         </PreviewWrapper>
+        <History requestData={requestData} />
       </article>
     </main>
   );

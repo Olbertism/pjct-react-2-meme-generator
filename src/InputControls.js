@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import './App.css';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function InputControls(props) {
   const [topText, setTopText] = useState('');
@@ -8,8 +8,14 @@ export default function InputControls(props) {
   const [template, setTemplate] = useState('');
   const [templateList, setTemplateList] = useState([]);
 
-  const requestData = [topText, bottomText, template];
-  console.log(requestData);
+  const inputHistory = JSON.parse(localStorage.getItem('items')) || [];
+  const [items, setItems] = useState(inputHistory);
+
+  useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(items));
+  }, [items]);
+
+  // const requestData = [topText, bottomText, template];
   const requestBaseAddress = 'https://api.memegen.link/templates/';
 
   function createReqBody() {
@@ -24,6 +30,7 @@ export default function InputControls(props) {
   };
 
   const handleGeneration = () => {
+    setItems((rawStorage) => [...rawStorage, [topText, bottomText, template]]);
     axios
       .post(createReqBody()[0], createReqBody()[1])
       .then(function (response) {
@@ -41,6 +48,10 @@ export default function InputControls(props) {
         response.data.forEach((entry) => {
           templates.push(entry);
         });
+        templates.sort((a, b) =>
+          a.name > b.name ? 1 : b.name > a.name ? -1 : 0,
+        );
+
         console.log('templates array: ', templates);
         setTemplateList(templates);
       })
@@ -51,6 +62,8 @@ export default function InputControls(props) {
   useEffect(() => {
     getTemplates().catch(() => {});
   }, []);
+
+  console.log('items state is: ', items);
 
   return (
     <>

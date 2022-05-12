@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 
 export const globalStyles = css`
- @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Open+Sans&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Open+Sans&display=swap');
   @font-face {
     font-family: 'Open Sans', sans-serif;
     src: url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
@@ -32,8 +32,6 @@ export const globalStyles = css`
     background-color: white;
     margin: 0 auto;
     margin-top: 3%;
-
-
   }
 
   article {
@@ -43,13 +41,12 @@ export const globalStyles = css`
   }
 
   h1 {
-    font-family: 'Oleo Script Swash Caps' , cursive;
+    font-family: 'Oleo Script Swash Caps', cursive;
     font-size: 38px;
     color: #f24242;
   }
 
   h2 {
-
     color: #4254b5;
   }
   *:focus {
