@@ -11,6 +11,8 @@ export default function InputControls(props) {
   const inputHistory = JSON.parse(localStorage.getItem('items')) || [];
   const [items, setItems] = useState(inputHistory);
 
+  console.log('top text: ', topText);
+
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
@@ -30,7 +32,11 @@ export default function InputControls(props) {
   };
 
   const handleGeneration = () => {
+    console.log(
+      'placing into req: ' + topText + ' ' + bottomText + ' ' + template,
+    );
     setItems((rawStorage) => [...rawStorage, [topText, bottomText, template]]);
+
     axios
       .post(createReqBody()[0], createReqBody()[1])
       .then(function (response) {
@@ -43,7 +49,7 @@ export default function InputControls(props) {
     await axios
       .get(requestBaseAddress)
       .then((response) => {
-        console.log('template response: ', response.data);
+        // console.log('template response: ', response.data);
         const templates = [''];
         response.data.forEach((entry) => {
           templates.push(entry);
@@ -52,7 +58,7 @@ export default function InputControls(props) {
           a.name > b.name ? 1 : b.name > a.name ? -1 : 0,
         );
 
-        console.log('templates array: ', templates);
+        // console.log('templates array: ', templates);
         setTemplateList(templates);
       })
       .catch(() => {
@@ -63,7 +69,28 @@ export default function InputControls(props) {
     getTemplates().catch(() => {});
   }, []);
 
-  console.log('items state is: ', items);
+  useEffect(() => {
+    if (template !== '') {
+      console.log(bottomText);
+      props.templateChangeListener(template);
+    }
+  }, [bottomText, props, template]);
+
+  useEffect(() => {
+    if (bottomText !== '') {
+      console.log(bottomText);
+      props.bottomTextChangeListener(bottomText);
+    }
+  }, [bottomText, props]);
+
+  useEffect(() => {
+    if (topText !== '') {
+      console.log(topText);
+      props.topTextChangeListener(topText);
+    }
+  }, [topText, props]);
+
+  // console.log('items state is: ', items);
 
   return (
     <>
@@ -73,6 +100,7 @@ export default function InputControls(props) {
         <input
           onChange={(event) => {
             setTopText(event.currentTarget.value);
+            //
           }}
         />
       </label>
@@ -81,6 +109,7 @@ export default function InputControls(props) {
         <input
           onChange={(event) => {
             setBottomText(event.currentTarget.value);
+            //
           }}
         />
       </label>

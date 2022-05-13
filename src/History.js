@@ -13,16 +13,12 @@ export default function History(props) {
     }
   }, []);
 
-  console.log('items in history is now: ', items);
+  console.log(items);
 
   function clearStorage() {
     localStorage.clear();
     setItems([]);
   }
-
-  console.log('parsed storage: ', JSON.parse(localStorage.getItem('items')));
-  console.log('unparsed: ', localStorage.getItem('items'));
-  console.log('stringified: ', JSON.stringify(localStorage.getItem('items')));
 
   let parsedStorage = JSON.parse(localStorage.getItem('items'));
   if (!parsedStorage) {
@@ -36,7 +32,7 @@ export default function History(props) {
       <div id="IAMHERE">
         {parsedStorage.map((item) => {
           return (
-            <div key={item}>
+            <div key={Date.now()}>
               <ul>
                 {item.map((stuff) => {
                   return <li key={stuff}>{stuff}</li>;

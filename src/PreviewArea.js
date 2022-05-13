@@ -16,18 +16,14 @@ export default function PreviewArea(props) {
           data-test-id="meme-image"
           width="400"
         />
-        Download
+        Download original
       </a>
 
-      {/* <button
-        onClick={() => {
-          document.getElementById('DL').simulateClick();
-        }}
-      >
+      <button>
         <a id="DL" href={props.imgAddress} download="test">
-          Download 2
+          Download
         </a>
-      </button> */}
+      </button>
     </>
   );
 }
