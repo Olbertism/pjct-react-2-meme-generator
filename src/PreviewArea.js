@@ -9,6 +9,12 @@ export default function PreviewArea(props) {
     <>
       <h2>Your meme</h2>
 
+      <button>
+        <a id="DL" href={props.imgAddress} download="test">
+          Download
+        </a>
+      </button>
+
       <a href={props.imgAddress}>
         <img
           src={props.imgAddress}
@@ -16,14 +22,8 @@ export default function PreviewArea(props) {
           data-test-id="meme-image"
           width="400"
         />
-        Download original
+        click
       </a>
-
-      <button>
-        <a id="DL" href={props.imgAddress} download="test">
-          Download
-        </a>
-      </button>
     </>
   );
 }
